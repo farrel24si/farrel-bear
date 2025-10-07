@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -27,7 +26,20 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'nama'       => 'required|max:10',
+            'email'      => ['required', 'email'],
+            'pertanyaan' => 'required|max:300|min:8',
+        ]);
+        //dd($request->all());
+        $data['nama']       = $request->nama;
+        $data['email']      = $request->email;
+        $data['pertanyaan'] = $request->pertanyaan;
+
+        // return view('home-question-respon', $data);
+        // return redirect()->back();
+        return redirect()->route('home')->with('info', 'Pertanyaan Anda sudah kami terima, Terima kasih!, <b>' . $data['nama'] . '</b> email anda <b>' . $data['email'] . '</b> akan kami jawab sebentar lagi' . $data['pertanyaan'] . 'akan segera kami jawab');
+        // return redirect()->away('https://www.chatgpt.com');
     }
 
     /**

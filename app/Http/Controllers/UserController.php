@@ -33,7 +33,7 @@ class UserController extends Controller
         //dd($request->all());
 
         $request->validate([
-            'nama'     => 'required|max:100',
+            'name'     => 'required|max:100',
             'email'    => ['required', 'email'],
             'password' => 'required|max:300|min:8',
         ]);

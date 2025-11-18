@@ -66,17 +66,15 @@
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                         </button>
-                                        @if(request('search'))
-							<a href="{{ request()->fullUrlWithQuery(['search'=> null]) }}" class="btn btn-outline-secondary ml-3" id="clear-search"> Clear</a>
-					@endif
+                                        @if (request('search'))
+                                            <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}"
+                                                class="btn btn-outline-secondary ml-3" id="clear-search"> Clear</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </form>
                         <table id="table-pelanggan" class="table table-centered table-nowrap mb-0 rounded">
-                            <div class="mt-3">
-                                {{ $dataPelanggan->links('pagination::bootstrap-5') }}
-                            </div>
                             <thead class="thead-light">
                                 <tr>
                                     <th class="border-0">First Name</th>
@@ -129,6 +127,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="mt-3">
+                            {{ $dataPelanggan->links('pagination::bootstrap-5') }}
+                        </div>
                     </div>
                 </div>
             </div>

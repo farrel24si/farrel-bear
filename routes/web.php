@@ -11,7 +11,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\MatakuliahController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
 Route::get('/pcr', function () {
@@ -57,5 +57,9 @@ route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 Route::resource('pelanggan', PelangganController::class);
 
-Route::resource('user', UserController::class);
+// Tambahan routes untuk upload file
+Route::get('pelanggan/{pelanggan}/show', [PelangganController::class, 'show'])->name('pelanggan.show');
+Route::post('pelanggan/{pelanggan}/upload-files', [PelangganController::class, 'uploadFiles'])->name('pelanggan.upload-files');
+Route::delete('pelanggan/{pelanggan}/files/{file}', [PelangganController::class, 'deleteFile'])->name('pelanggan.delete-file');
 
+Route::resource('user', UserController::class);

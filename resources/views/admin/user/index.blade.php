@@ -46,18 +46,25 @@
                             <table id="table-user" class="table table-centered table-nowrap mb-0 rounded">
                                 <thead class="thead-light">
                                     <tr>
+                                        <th class="border-0">Foto Profil</th>
                                         <th class="border-0">Nama Lengkap</th>
                                         <th class="border-0">Email</th>
-                                        <th class="border-0">Password</th>
                                         <th class="border-0 rounded-end">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($dataUser as $item)
                                         <tr>
+                                            <td>
+                                                <img src="{{ $item->profile_picture_url }}"
+                                                     alt="Profile Picture"
+                                                     class="rounded-circle"
+                                                     width="50"
+                                                     height="50"
+                                                     style="object-fit: cover;">
+                                            </td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
-                                            <td>{{ $item->password }}</td>
                                             <td>
                                                 <a href="{{ route('user.edit', $item->id) }}"
                                                     class="btn btn-info btn-sm">
@@ -73,7 +80,7 @@
                                                 <form action="{{ route('user.destroy',$item->id) }}" method="POST" style="display:inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
                                                         <svg class="icon icon-xs me-2" data-slot="icon"
                                                             fill="none" stroke-width="1.5" stroke="currentColor"
                                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
@@ -90,6 +97,11 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-center mt-4">
+                            {{ $dataUser->links() }}
                         </div>
                     </div>
                 </div>

@@ -14,7 +14,7 @@
                             </svg>
                         </a>
                     </li>
-                    <li class="breadcrumb-item"><a href="{{ route('pelanggan.index') }}">User</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('user.index') }}">User</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Tambah User</li>
                 </ol>
             </nav>
@@ -33,31 +33,48 @@
             <div class="col-12 mb-4">
                 <div class="card border-0 shadow components-section">
                     <div class="card-body">
-                        <form action="{{ route('user.store') }}" method="POST">
+                        <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-4">
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="mb-3">
-                                        <label for="name" class="form-label">name</label>
+                                        <label for="name" class="form-label">Nama Lengkap</label>
                                         <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}" required>
+                                        @error('name')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="text" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                                        <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                                        @error('email')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
 
-
                                 <div class="col-lg-4 col-sm-12">
                                     <div class="mb-3">
+                                        <label for="profile_picture" class="form-label">Foto Profil</label>
+                                        <input type="file" id="profile_picture" name="profile_picture" class="form-control" accept="image/*">
+                                        <div class="form-text">Format: JPG, PNG, GIF. Maksimal: 2MB</div>
+                                        @error('profile_picture')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="password" id="password" name="password" class="form-control" value="{{ old('password') }}">
+                                        <input type="password" id="password" name="password" class="form-control" required>
+                                        @error('password')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                                        <input type="password" id="password" name="password" class="form-control" value="{{ old('password') }}">
+                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
                                     </div>
 
                                     <div class="">
